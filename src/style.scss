@@ -1,6 +1,6 @@
-$bk-ground: rgb(219, 213, 213);
-$color:rgb(41, 36, 36);
-
+$bk-ground: #313448;
+$color:#fff;
+$indent-20px:20px;
 *{
     padding: 0;
     margin: 0;
@@ -14,8 +14,9 @@ body{
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: $indent-20px;
+    padding-bottom: $indent-20px;
+    font-family: "Trebuchet MS", "Helvetica", sans-serif;
 }
 .title{
     font-size: 45px;
@@ -27,17 +28,23 @@ body{
     display: flex;
     align-items: center;
     border-radius: 5px;
-    border: 3px solid $color;
+    border: 5px solid #65677d;
     order: 2;
-    margin-top: 20px;
+    margin-top: $indent-20px;
     height: 200px;
+    background-color: rgba(189,190,207,.3);
 }
 .textarea{
     width: 700px;
     height: 200px;
-    padding: 20px;
+    padding: $indent-20px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: $indent-20px;
+    border: 5px solid #65677d;
+    border-radius: 15px;
+    outline: none;
+    background: #7a7c94;
+    color: $color;
 }
 .description{
     order: 4;
