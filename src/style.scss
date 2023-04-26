@@ -1,16 +1,46 @@
-$bk-ground:rgb(41, 36, 36);
-$color:rgb(219, 213, 213);
+$bk-ground: rgb(219, 213, 213);
+$color:rgb(41, 36, 36);
 
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 body{
     background-color: $bk-ground;
     color: $color;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-.header{
-    .container{
-        width: 1140px;
-        margin: 0 auto;
-        h1{
-            color: aqua;
-        }
-    }
+.title{
+    font-size: 45px;
+    order:-1;
+    
+}
+.keyboard{
+    width: 700px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 3px solid $color;
+    order: 2;
+    margin-top: 20px;
+    height: 200px;
+}
+.textarea{
+    width: 700px;
+    height: 200px;
+    padding: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.description{
+    order: 4;
+    margin-top: 40px;
+    font-weight: 600;
 }
