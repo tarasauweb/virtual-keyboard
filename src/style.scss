@@ -32,26 +32,54 @@ body{
     border: 5px solid #65677d;
     order: 2;
     margin-top: $indent-20px;
-    height: 200px;
     background-color: rgba(189,190,207,.3);
-    &__row{
+    &__keys{
         display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
     }
     &__key{
-        margin: 2px;
+        margin-right: 2px;
         padding: 5px;
         background: rgba(0,0,0,.5);
-        min-width: 46px;
-        height: 47px;
+        min-width: 45px;
+        height: 45px;
         border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: $transition;
+        &:last-child{
+            margin-right: 0px;
+        }
         &:hover{
             background-color: cadetblue;
             transition: $transition;
+        }
+        &[data="Shift"]{
+            width: 75px;
+            &:last-child{
+                width: 93px;
+            }
+        }
+        &[data="Backspace"]{
+            width: 110px;
+        }
+        &[data="space"]{
+            width: 310px;
+        }
+        &[data="Enter"]{
+            width: 75px;
+        }
+        &[data="Tab"]{
+            width: 82px;
+        }
+        &[data="Caps Lock"]{
+            width: 82px;
+        }
+        &[data="`"]{
+            width: 45px;
         }
     }
 }
