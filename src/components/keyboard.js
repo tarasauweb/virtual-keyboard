@@ -38,6 +38,9 @@ function createKeys (obj){
             if(element === 'alt-left' || element === 'alt-right'){
                 btnKey.innerHTML = `Alt`
             }
+            if(element === 'space'){
+                btnKey.innerHTML = ``
+            }
         });
         board.insertAdjacentElement('afterbegin' , keyboardRow)
     }
