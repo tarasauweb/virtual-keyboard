@@ -29,6 +29,15 @@ function createKeys (obj){
             if(element === 'arr-right'){
                 btnKey.innerHTML = `&#8658`
             }
+            if(element === 'shift-left' || element === 'shift-right'){
+                btnKey.innerHTML = `Shift`
+            }
+            if(element === 'ctrl-left' || element === 'ctrl-right'){
+                btnKey.innerHTML = `Ctrl`
+            }
+            if(element === 'alt-left' || element === 'alt-right'){
+                btnKey.innerHTML = `Alt`
+            }
         });
         board.insertAdjacentElement('afterbegin' , keyboardRow)
     }
@@ -40,8 +49,8 @@ export default creacteKeyBoard
 
 const keyObj = {
     eng:{
-        row5:['Ctrl' , 'Win' , 'Alt' , 'space' , 'Alt' , 'arr-left' , 'arr-down' , 'arr-right' , 'Ctrl' ],
-        row4:[`Shift` ,  'z' , 'x' , 'c' , 'v' , 'b' , 'n' , 'm' , ',' , '.' , '/' , 'arr-up',`Shift`],
+        row5:['ctrl-left' , 'Win' , 'alt-left' , 'space' , 'alt-right' , 'arr-left' , 'arr-down' , 'arr-right' , 'ctrl-right' ],
+        row4:[`shift-left` ,  'z' , 'x' , 'c' , 'v' , 'b' , 'n' , 'm' , ',' , '.' , '/' , 'arr-up',`shift-right`],
         row3:['Caps Lock' , 'a' , 's' , 'd' , 'f' , 'g' , 'h' , 'j' , 'k' , 'l' , ';' , `'` , 'Enter'],
         row2:['Tab' , 'q' , 'w' , 'e' , 'r' , 't' , 'y' , 'u' , 'i' , 'o' , 'p' , '[', ']' , '/'],
         row1:['`' , 1,2,3,4,5,6,7,8,9,0,'-', 'Backspace'],
