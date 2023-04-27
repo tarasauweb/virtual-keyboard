@@ -60,19 +60,22 @@ body{
             background-color: cadetblue;
             transition: $transition;
         }
-        &[data="shift-left"]{
+        &-active{
+            background-color: cadetblue;
+        }
+        &[data="ShiftLeft"]{
             width: 75px;
             &:last-child{
                 width: 95px;
             }
         }
-        &[data="shift-right"]{
+        &[data="ShiftRight"]{
             width: 93px;
         }
         &[data="Backspace"]{
-            width: 120px;
+            width: 80px;
         }
-        &[data="space"]{
+        &[data="Space"]{
             width: 310px;
         }
         &[data="Enter"]{

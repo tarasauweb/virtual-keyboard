@@ -1,3 +1,5 @@
+import keyObj from './keys-obj'
+
 function creacteKeyBoard() {
     const keyboard = document.createElement('div');
     keyboard.classList.add('keyboard'); 
@@ -5,13 +7,13 @@ function creacteKeyBoard() {
     return keyboard
 }
 
-function createKeys (obj){
+export function createKeys (obj){
     const board = document.createElement('div');
     board.classList.add('keyboard__row')
     for(let key in  obj) {
         const keyboardRow = document.createElement('div');
         keyboardRow.classList.add('keyboard__keys')
-        obj[key].reverse().forEach(element => {
+        obj[key].forEach(element => {
             const btnKey = document.createElement('div')
             btnKey.classList.add('keyboard__key')
             btnKey.textContent = element;
@@ -29,17 +31,20 @@ function createKeys (obj){
             if(element === 'arr-right'){
                 btnKey.innerHTML = `&#8658`
             }
-            if(element === 'shift-left' || element === 'shift-right'){
+            if(element === 'ShiftLeft' || element === 'ShiftRight'){
                 btnKey.innerHTML = `Shift`
             }
-            if(element === 'ctrl-left' || element === 'ctrl-right'){
+            if(element === 'ControlLeft' || element === 'ControlRight'){
                 btnKey.innerHTML = `Ctrl`
             }
-            if(element === 'alt-left' || element === 'alt-right'){
+            if(element === 'AltLeft' || element === 'AltRight'){
                 btnKey.innerHTML = `Alt`
             }
-            if(element === 'space'){
+            if(element === 'Space'){
                 btnKey.innerHTML = ``
+            }
+            if(element === 'slash'){
+                btnKey.innerHTML = `&#x5c`
             }
         });
         board.insertAdjacentElement('afterbegin' , keyboardRow)
@@ -50,15 +55,6 @@ function createKeys (obj){
 
 export default creacteKeyBoard
 
-const keyObj = {
-    eng:{
-        row5:['ctrl-left' , 'Win' , 'alt-left' , 'space' , 'alt-right' , 'arr-left' , 'arr-down' , 'arr-right' , 'ctrl-right' ],
-        row4:[`shift-left` ,  'z' , 'x' , 'c' , 'v' , 'b' , 'n' , 'm' , ',' , '.' , '/' , 'arr-up',`shift-right`],
-        row3:['Caps Lock' , 'a' , 's' , 'd' , 'f' , 'g' , 'h' , 'j' , 'k' , 'l' , ';' , `'` , 'Enter'],
-        row2:['Tab' , 'q' , 'w' , 'e' , 'r' , 't' , 'y' , 'u' , 'i' , 'o' , 'p' , '[', ']' , '/'],
-        row1:['`' , 1,2,3,4,5,6,7,8,9,0,'-', 'Backspace'],
-    },
 
-}
 
 
