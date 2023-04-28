@@ -33,12 +33,14 @@ function listener(element) {
         }
         if(ctrlLeft&&altLeft){
             if(!belLang){
+                
                 belLang = true;
-                layout = 'bel'
+                
+                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }else{
                 belLang = false
-                layout = 'eng'
+                capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }
         }
@@ -119,12 +121,12 @@ function listener(element) {
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
             e.preventDefault();
             if(!belLang){
-                layout = 'eng';
+                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }
             
             else{
-                layout = 'bel'
+                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }
         }
