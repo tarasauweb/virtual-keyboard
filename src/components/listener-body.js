@@ -143,6 +143,9 @@ function listener(element) {
             if(e.code === item.getAttribute('data')){
                 item.classList.remove('keyboard__key-active')
             }
+            if(item.getAttribute('data') === 'CapsLock' && capsLock){
+                item.classList.add('keyboard__key-active')
+            }
         })
     })
 
