@@ -176,7 +176,7 @@ const keys = {
             eng:'n',
             bel:'т',
             shiftEng:'N',
-            shiftBel:'т',
+            shiftBel:'Т',
             CapsLockEng:'N',
             CapsLockBel:'Т',
         },

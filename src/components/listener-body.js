@@ -7,39 +7,76 @@ function searchElements() {
     keyboardKeys.forEach(item => item.remove());
     keyboardRow.remove()
 }
+function activeKeyBoard(obj , myLayout , myKeyBoard , keysNow){
+    searchElements();
+    let layout = myLayout
+    myKeyBoard.insertAdjacentElement('afterbegin' , createKeys(obj , layout))
+    keysNow = document.querySelectorAll('.keyboard__key');
+    return keysNow 
+}
 function listener(element) {
     const myTextArea = document.querySelector('.textarea');
     const keyboard = document.querySelector('.keyboard');
     let capsLock = false;
     let belLang = false;
-    let ctrlRight = false;
-    let altRight = false;
+    let ctrlLeft = false;
+    let altLeft = false;
     let layout = 'eng'
     let keyBoardNow = document.querySelectorAll('.keyboard__key')
     element.addEventListener('keydown', (e) => {
         // console.log(e.code)
+        if(e.code === 'ControlLeft'){
+            ctrlLeft = true;
+        }
+        if(e.code === 'AltLeft'){
+            altLeft = true;
+        }
+        if(ctrlLeft&&altLeft){
+            if(!belLang){
+                belLang = true;
+                layout = 'bel'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }else{
+                belLang = false
+                layout = 'eng'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+        }
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
-            searchElements();
-            layout = 'shiftEng'
-            keyboard.insertAdjacentElement('afterbegin' , createKeys(keys , layout))
-            keyBoardNow = document.querySelectorAll('.keyboard__key')
+            if(!belLang){
+                layout = 'shiftEng';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            else{
+                layout = 'shiftBel'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            
         }
         if(e.code === 'CapsLock'){
             if(capsLock){
-                capsLock = false
-                searchElements();
-                layout = 'eng'
-                keyboard.insertAdjacentElement('afterbegin' , createKeys(keys , layout))
-                keyBoardNow = document.querySelectorAll('.keyboard__key')
+                capsLock = false;
+                if(!belLang){
+                    layout = 'eng';
+                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+                }
+                else{
+                    layout = 'bel';
+                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+                }
             }else{
-                capsLock = true
-                searchElements();
-                layout = 'CapsLockEng'
-                keyboard.insertAdjacentElement('afterbegin' , createKeys(keys , layout))
-                keyBoardNow = document.querySelectorAll('.keyboard__key')
+                capsLock = true;
+                if(!belLang){
+                    layout = 'CapsLockEng';
+                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+                }
+                else{
+                    layout = 'CapsLockBel';
+                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+                }
             }
         }
-
+        
         keyBoardNow.forEach(item=>{
             if(e.code === item.getAttribute('data') ){
                 item.classList.add('keyboard__key-active');
@@ -65,9 +102,13 @@ function listener(element) {
                 if(e.code === 'MetaLeft') {
                     return myTextArea
                 }
+                if(e.code === 'CapsLock') {
+                    return myTextArea
+                }
                 else{
                     return myTextArea.innerHTML +=item.textContent
                 }
+                
                 
             }
             
@@ -77,12 +118,26 @@ function listener(element) {
     element.addEventListener('keyup', (e) => {
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
             e.preventDefault();
-            searchElements();
-            layout = 'eng'
-            keyboard.insertAdjacentElement('afterbegin' , createKeys(keys , layout))
-            keyBoardNow = document.querySelectorAll('.keyboard__key')
+            if(!belLang){
+                layout = 'eng';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            
+            else{
+                layout = 'bel'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+        }
+        if(e.code === 'ControlLeft'){
+            ctrlLeft = false;
+        }
+        if(e.code === 'AltLeft'){
+            altLeft = false;
         }
         keyBoardNow.forEach(item=>{
+            if(e.code === 'CapsLock' && capsLock && item.getAttribute('data') === 'CapsLock'){
+                return item.classList.add('keyboard__key-active')
+            }
             if(e.code === item.getAttribute('data')){
                 item.classList.remove('keyboard__key-active')
             }
