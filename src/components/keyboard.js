@@ -43,11 +43,82 @@ export function createKeys (obj){
             if(element === 'Space'){
                 btnKey.innerHTML = ``
             }
-            if(element === 'slash'){
+            if(element === 'Backslash'){
                 btnKey.innerHTML = `&#x5c`
             }
             if(element === 'CapsLock'){
                 btnKey.innerHTML = `Caps Lock`
+            }
+            if(element === 'Enter'){
+                btnKey.innerHTML = `Enter`
+            }
+            if(element === 'Backquote'){
+                btnKey.innerHTML =  '`'
+            }
+            if(element === 'Quote'){
+                btnKey.innerHTML = `'`
+            }
+            if(element === 'Comma'){
+                btnKey.innerHTML = `,`
+            }
+            if(element === 'Period'){
+                btnKey.innerHTML = `.`
+            }
+            if(element === 'Semicolon'){
+                btnKey.innerHTML = `;`
+            }
+            if(element === 'BracketLeft'){
+                btnKey.innerHTML = `[`
+            }
+            if(element === 'BracketRight'){
+                btnKey.innerHTML = `]`
+            }
+            if(element === 'Slash'){
+                btnKey.innerHTML = `/`
+            }
+            if(element === 'Equal'){
+                btnKey.innerHTML = `=`
+            }
+            if(element === 'Minus'){
+                btnKey.innerHTML = `-`
+            }
+            if(element === 'Digit1'){
+                btnKey.innerHTML = `1`
+            }
+            if(element === 'Digit2'){
+                btnKey.innerHTML = `2`
+            }
+            if(element === 'Digit3'){
+                btnKey.innerHTML = `3`
+            }
+            if(element === 'Digit4'){
+                btnKey.innerHTML = `4`
+            }
+            if(element === 'Digit5'){
+                btnKey.innerHTML = `5`
+            }
+            if(element === 'Digit6'){
+                btnKey.innerHTML = `6`
+            }
+            if(element === 'Digit7'){
+                btnKey.innerHTML = `7`
+            }
+            if(element === 'Digit8'){
+                btnKey.innerHTML = `8`
+            }
+            if(element === 'Digit9'){
+                btnKey.innerHTML = `9`
+            }
+            if(element === 'Digit0'){
+                btnKey.innerHTML = `0`
+            }
+            if(element === 'MetaLeft'){
+                btnKey.innerHTML = `Win`
+            }
+           
+            if(element.includes('Key')){
+                console.log(typeof element)
+                // element.innerHTML = element.slice(0,-1)
             }
         });
         board.insertAdjacentElement('afterbegin' , keyboardRow)
