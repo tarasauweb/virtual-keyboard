@@ -121,7 +121,7 @@ function listener(element) {
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
             e.preventDefault();
             if(!belLang){
-                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
+                capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }
             
