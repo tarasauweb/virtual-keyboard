@@ -19,16 +19,16 @@ export function createKeys (obj){
             btnKey.textContent = element;
             btnKey.setAttribute('data' , element);
             keyboardRow.insertAdjacentElement('afterbegin' , btnKey)
-            if(element === 'arr-down'){
+            if(element === 'ArrowDown'){
                 btnKey.innerHTML = `&#8659`
             }
-            if(element === 'arr-up'){
+            if(element === 'ArrowUp'){
                 btnKey.innerHTML = `&#8657`
             }
-            if(element === 'arr-left'){
+            if(element === 'ArrowLeft'){
                 btnKey.innerHTML = `&#8656`
             }
-            if(element === 'arr-right'){
+            if(element === 'ArrowRight'){
                 btnKey.innerHTML = `&#8658`
             }
             if(element === 'ShiftLeft' || element === 'ShiftRight'){
@@ -45,6 +45,9 @@ export function createKeys (obj){
             }
             if(element === 'slash'){
                 btnKey.innerHTML = `&#x5c`
+            }
+            if(element === 'CapsLock'){
+                btnKey.innerHTML = `Caps Lock`
             }
         });
         board.insertAdjacentElement('afterbegin' , keyboardRow)
