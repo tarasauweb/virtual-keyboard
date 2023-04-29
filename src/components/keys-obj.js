@@ -346,6 +346,14 @@ const keys = {
         
     },
     row2:{
+        Delete:{
+            eng:'Del',
+            bel:'Del',
+            shiftBel:'Del',
+            shiftEng:'Del',
+            CapsLockEng:'Del',
+            CapsLockBel:'Del',
+        },
         Backslash:{
             eng:'Backslash',
             bel:'Backslash',
