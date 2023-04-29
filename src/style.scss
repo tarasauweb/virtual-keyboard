@@ -64,28 +64,28 @@ body{
             background-color: cadetblue;
         }
         &[data="ShiftLeft"]{
-            width: 75px;
+            width: 95px;
             &:last-child{
                 width: 95px;
             }
         }
         &[data="ShiftRight"]{
-            width: 93px;
+            width: 110px;
         }
         &[data="Backspace"]{
-            width: 80px;
+            width: 110px;
         }
         &[data="Space"]{
-            width: 310px;
+            width: 285px;
         }
         &[data="Enter"]{
-            width: 75px;
+            width: 110px;
         }
         &[data="Tab"]{
             width: 82px;
         }
-        &[data="Caps Lock"]{
-            width: 82px;
+        &[data="CapsLock"]{
+            width: 95px;
         }
         &[data="`"]{
             width: 45px;
@@ -93,7 +93,7 @@ body{
     }
 }
 .textarea{
-    width: 700px;
+    width: 750px;
     height: 200px;
     padding: $indent-20px;
     font-size: 20px;

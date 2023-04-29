@@ -16,7 +16,6 @@ function activeKeyBoard(obj , myLayout , myKeyBoard , keysNow){
 }
 function getPosition(ctrl) {
     ctrl.focus();
-    console.log(ctrl.selectionStart);
     let postion = ctrl.selectionStart
     const lengthStr = ctrl.textContent.length
     if(postion<lengthStr){
@@ -124,7 +123,6 @@ function listener(element) {
             }
         }
         keyBoardNow.forEach(item=>{
-            console.log(e.code)
             if(e.code === item.getAttribute('data') ){
                 item.classList.add('keyboard__key-active');
                 if(e.code === 'Tab' && item.getAttribute('data') === 'Tab'){
