@@ -1,6 +1,3 @@
-function createTextArea() {
-    const myArea = `<textarea class="textarea"></textarea>`;
-    return myArea;
-}
+const createTextArea = () =>  `<textarea class="textarea"></textarea>`;
 
 export default createTextArea

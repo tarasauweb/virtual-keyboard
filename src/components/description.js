@@ -1,4 +1,4 @@
-function description () {
+const description = () => {
     return (
         `
         <div class="description">

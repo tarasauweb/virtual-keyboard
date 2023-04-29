@@ -11,7 +11,4 @@ body.insertAdjacentHTML('afterbegin' , mainTitle);
 body.insertAdjacentHTML('afterbegin' , textarea);
 body.insertAdjacentElement('afterbegin' , creacteKeyBoard());
 body.insertAdjacentHTML('beforeend' , description())
-
-
-
 listener(body)
