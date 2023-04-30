@@ -25,6 +25,7 @@ function getPosition(ctrl) {
     }
     return ctrl
 }
+
 function listener(element) {
     const myTextArea = document.querySelector('.textarea');
     const keyboard = document.querySelector('.keyboard');
@@ -34,7 +35,69 @@ function listener(element) {
     let altLeft = false;
     let layout = 'eng';
     let keyBoardNow = document.querySelectorAll('.keyboard__key');
-    
+    let listerkeysShiftUp = (e)=>{
+        e.preventDefault();
+            if(!belLang){
+                capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            else{
+                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+    }
+    let listenerShiftDown = ()=>{
+       
+        if(!belLang){
+            layout = 'shiftEng';
+            keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+        }
+        else{
+            layout = 'shiftBel'
+            keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+        }
+        if(capsLock){
+            const keyCapsLock = document.querySelector('.keyboard__key[data="CapsLock"]')
+            keyCapsLock.classList.add('keyboard__key-active')
+        }
+    }
+    let listenrCapsLock = (e)=>{
+       
+        if(capsLock){
+            capsLock = false;
+            if(!belLang){
+                layout = 'eng';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            else{
+                layout = 'bel';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+        }else{
+            capsLock = true;
+            if(!belLang){
+                layout = 'CapsLockEng';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+            else{
+                layout = 'CapsLockBel';
+                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+            }
+        }
+        
+        return capsLock
+    }
+    let changeLang = ()=>{
+        if(!belLang){
+            belLang = true;
+            capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
+            keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+        }else{
+            belLang = false
+            capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
+            keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
+        }
+    }
     element.addEventListener('click' , (e)=>{
         if(e.target.getAttribute('data')){
             if(
@@ -62,8 +125,48 @@ function listener(element) {
         if(e.target.getAttribute('data') === 'Delete'){
             getPosition(myTextArea)
         }
+        if(e.target.getAttribute('data') === 'Enter'){
+            return myTextArea.innerHTML += '\n'
+        }
+        if(e.target.getAttribute('data') === 'CapsLock'){
+            listenrCapsLock()
+        }
+        if(e.target.getAttribute('data') === 'Backspace') {
+            return myTextArea.innerHTML = myTextArea.textContent.slice(0,-1)
+        }
+        if(e.target.getAttribute('data') === 'Tab'){
+            e.preventDefault()
+            return myTextArea.innerHTML += ' ' + ' ';
+        }
         
     })
+    element.addEventListener('mousedown' , (e)=>{
+        
+        if(e.target.getAttribute('data') === 'ShiftLeft' || e.target.getAttribute('data') === 'ShiftRight'){
+            listenerShiftDown()
+        }
+        if(e.target.getAttribute('data') === 'ControlLeft'){
+            ctrlLeft = true
+        }
+        if(e.target.getAttribute('data') === 'AltLeft'){
+            altLeft = true
+        }
+        if(ctrlLeft&&altLeft){
+            changeLang()
+        }
+    })
+    element.addEventListener('mouseup' , (e)=>{
+        if(e.target.getAttribute('data') === 'ShiftLeft' || e.target.getAttribute('data') === 'ShiftRight'){
+            listerkeysShiftUp(e)
+        }
+        if(e.target.getAttribute('data') === 'ControlLeft'){
+            ctrlLeft = false
+        }
+        if(e.target.getAttribute('data') === 'AltLeft'){
+            altLeft = false
+        }
+    })
+    
     element.addEventListener('keydown', (e) => {
         // console.log(e.code)
         if(e.code === 'ControlLeft'){
@@ -74,53 +177,14 @@ function listener(element) {
         }
         
         if(ctrlLeft&&altLeft){
-            if(!belLang){
-                belLang = true;
-                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }else{
-                belLang = false
-                capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }
+            changeLang()
         }
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
+            listenerShiftDown(e)
             
-            if(!belLang){
-                layout = 'shiftEng';
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }
-            else{
-                layout = 'shiftBel'
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }
-            if(capsLock){
-                const keyCapsLock = document.querySelector('.keyboard__key[data="CapsLock"]')
-                keyCapsLock.classList.add('keyboard__key-active')
-            }
         }
         if(e.code === 'CapsLock'){
-            if(capsLock){
-                capsLock = false;
-                if(!belLang){
-                    layout = 'eng';
-                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-                }
-                else{
-                    layout = 'bel';
-                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-                }
-            }else{
-                capsLock = true;
-                if(!belLang){
-                    layout = 'CapsLockEng';
-                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-                }
-                else{
-                    layout = 'CapsLockBel';
-                    keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-                }
-            }
+            listenrCapsLock()
         }
         keyBoardNow.forEach(item=>{
             if(e.code === item.getAttribute('data') ){
@@ -161,15 +225,7 @@ function listener(element) {
     })
     element.addEventListener('keyup', (e) => {
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
-            e.preventDefault();
-            if(!belLang){
-                capsLock === true ? layout = 'CapsLockEng' : layout = 'eng'
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }
-            else{
-                capsLock === true ? layout = 'CapsLockBel' : layout = 'bel'
-                keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
-            }
+            listerkeysShiftUp(e)
         }
         if(e.code === 'ControlLeft'){
             ctrlLeft = false;
