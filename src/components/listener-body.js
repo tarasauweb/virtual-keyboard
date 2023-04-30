@@ -62,7 +62,7 @@ function listener(element) {
         }
     }
     let listenrCapsLock = (e)=>{
-       
+        
         if(capsLock){
             capsLock = false;
             if(!belLang){
@@ -73,7 +73,9 @@ function listener(element) {
                 layout = 'bel';
                 keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
             }
-        }else{
+        }
+        
+        else{
             capsLock = true;
             if(!belLang){
                 layout = 'CapsLockEng';
@@ -128,8 +130,15 @@ function listener(element) {
         if(e.target.getAttribute('data') === 'Enter'){
             return myTextArea.innerHTML += '\n'
         }
+        if(e.target.getAttribute('data') === 'Space'){
+            return myTextArea.innerHTML += ' '
+        }
         if(e.target.getAttribute('data') === 'CapsLock'){
-            listenrCapsLock()
+            listenrCapsLock(e)
+            if(capsLock){
+                const keyCapsLock = document.querySelector('.keyboard__key[data="CapsLock"]')
+                keyCapsLock.classList.add('keyboard__key-active')
+            }
         }
         if(e.target.getAttribute('data') === 'Backspace') {
             return myTextArea.innerHTML = myTextArea.textContent.slice(0,-1)
@@ -154,6 +163,7 @@ function listener(element) {
         if(ctrlLeft&&altLeft){
             changeLang()
         }
+        
     })
     element.addEventListener('mouseup' , (e)=>{
         if(e.target.getAttribute('data') === 'ShiftLeft' || e.target.getAttribute('data') === 'ShiftRight'){
@@ -165,6 +175,7 @@ function listener(element) {
         if(e.target.getAttribute('data') === 'AltLeft'){
             altLeft = false
         }
+        
     })
     
     element.addEventListener('keydown', (e) => {
@@ -197,7 +208,7 @@ function listener(element) {
                     return myTextArea.innerHTML += '\n'
                 }
                 if(e.code === 'Backspace') {
-                    return myTextArea.innerHTML = myTextArea.textContent.slice(0,-1)
+                    return myTextArea
                 }
                 if(e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
                     return myTextArea

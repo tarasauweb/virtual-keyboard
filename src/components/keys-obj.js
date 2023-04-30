@@ -363,7 +363,7 @@ const keys = {
             CapsLockEng:'U',
             CapsLockBel:'Г',
         },
-        keyY:{
+        KeyY:{
             eng:'y',
             bel:'н',
             shiftEng:'Y',
