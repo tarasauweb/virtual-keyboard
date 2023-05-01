@@ -100,6 +100,35 @@ function listener(element) {
             keyBoardNow = activeKeyBoard(keys , layout , keyboard , keyBoardNow);
         }
     }
+    let postionCarret = 0;
+    let setCarret = ()=>{
+        myTextArea.selectionStart = myTextArea.textContent.length;
+        myTextArea.selectionSend = myTextArea.textContent.length
+        myTextArea.focus()
+    }
+    let listenerBackspace = ()=>{
+        if(postionCarret === 0) {
+            return myTextArea
+        }
+        if(postionCarret>0 && postionCarret<myTextArea.textContent.length){
+            console.log(postionCarret,myTextArea.textContent)
+            myTextArea.selectionEnd = postionCarret;
+            myTextArea.selectionSend = postionCarret;
+            myTextArea.innerHTML = myTextArea.textContent.slice(0,postionCarret-1) + myTextArea.textContent.slice(postionCarret,myTextArea.textContent.length);
+            postionCarret--
+            console.log(myTextArea.textContent)   
+            return myTextArea
+        }
+        else if(postionCarret === myTextArea.textContent.length){
+            console.log(postionCarret,myTextArea.textContent.length)
+            postionCarret = myTextArea.textContent.length
+            myTextArea.selectionEnd = postionCarret;
+            myTextArea.selectionSend = postionCarret;
+            myTextArea.innerHTML = myTextArea.textContent.slice(0,-1);
+            postionCarret--
+            return myTextArea
+        }
+    }
     element.addEventListener('click' , (e)=>{
         if(e.target.getAttribute('data')){
             if(
@@ -121,6 +150,7 @@ function listener(element) {
                 e.target.getAttribute('data').includes('ArrowLeft')||
                 e.target.getAttribute('data').includes('ArrowRight')
             ){
+                postionCarret++
                 myTextArea.innerHTML += e.target.textContent
             }
         }
@@ -128,9 +158,11 @@ function listener(element) {
             getPosition(myTextArea)
         }
         if(e.target.getAttribute('data') === 'Enter'){
+            postionCarret++
             return myTextArea.innerHTML += '\n'
         }
         if(e.target.getAttribute('data') === 'Space'){
+            postionCarret++
             return myTextArea.innerHTML += ' '
         }
         if(e.target.getAttribute('data') === 'CapsLock'){
@@ -141,11 +173,16 @@ function listener(element) {
             }
         }
         if(e.target.getAttribute('data') === 'Backspace') {
-            return myTextArea.innerHTML = myTextArea.textContent.slice(0,-1)
+            return listenerBackspace()
         }
         if(e.target.getAttribute('data') === 'Tab'){
             e.preventDefault()
+            postionCarret+=2;
             return myTextArea.innerHTML += ' ' + ' ';
+        }
+        if(e.target.classList.contains('textarea')){
+            postionCarret = myTextArea.selectionStart
+            console.log(postionCarret)
         }
         
     })
@@ -202,33 +239,35 @@ function listener(element) {
                 item.classList.add('keyboard__key-active');
                 if(e.code === 'Tab' && item.getAttribute('data') === 'Tab'){
                     e.preventDefault()
+                    postionCarret+=2;
                     return myTextArea.innerHTML += ' ' + ' ';
                 }
                 if(e.code === 'Enter') {
-                    return myTextArea.innerHTML += '\n'
+                    return myTextArea.innerHTML += '\n';
                 }
                 if(e.code === 'Backspace') {
-                    return myTextArea
+                    return listenerBackspace()
                 }
                 if(e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
-                    return myTextArea
+                    return myTextArea;
                 }
                 if(e.code === 'AltLeft' || e.code === 'AltRight') {
-                    return myTextArea
+                    return myTextArea;
                 }
                 if(e.code === 'ControlLeft' || e.code === 'ControlRight') {
-                    return myTextArea
+                    return myTextArea;
                 }
                 if(e.code === 'MetaLeft') {
-                    return myTextArea
+                    return myTextArea;
                 }
                 if(e.code === 'CapsLock') {
-                    return myTextArea
+                    return myTextArea;
                 }
                 if(e.code === 'Delete'){
                     getPosition(myTextArea)
                 }
                 else{
+                    postionCarret++
                     return myTextArea.innerHTML +=item.textContent
                 }
             }
