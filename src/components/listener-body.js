@@ -14,18 +14,6 @@ function activeKeyBoard(obj , myLayout , myKeyBoard , keysNow){
     keysNow = document.querySelectorAll('.keyboard__key');
     return keysNow 
 }
-function getPosition(ctrl) {
-    ctrl.focus();
-    let postion = ctrl.selectionStart
-    const lengthStr = ctrl.textContent.length
-    if(postion<lengthStr){
-        let chanhePosition = lengthStr - postion
-        ctrl.innerHTML = ctrl.textContent.slice(0,-1)
-        ctrl.selectionStart = lengthStr - chanhePosition
-    }
-    return ctrl
-}
-
 function listener(element) {
     const myTextArea = document.querySelector('.textarea');
     const keyboard = document.querySelector('.keyboard');
@@ -101,26 +89,28 @@ function listener(element) {
         }
     }
     let postionCarret = 0;
-    let setCarret = ()=>{
-        myTextArea.selectionStart = myTextArea.textContent.length;
-        myTextArea.selectionSend = myTextArea.textContent.length
-        myTextArea.focus()
+    let listenerDelete = ()=>{
+        const textLength = myTextArea.textContent.length;
+        if(postionCarret<textLength){
+            myTextArea.innerHTML = myTextArea.textContent.slice(0,postionCarret) + myTextArea.textContent.slice(postionCarret+1,textLength);
+            return postionCarret , myTextArea
+        }
+        if(postionCarret === textLength){
+            return myTextArea
+        }
     }
     let listenerBackspace = ()=>{
         if(postionCarret === 0) {
             return myTextArea
         }
         if(postionCarret>0 && postionCarret<myTextArea.textContent.length){
-            console.log(postionCarret,myTextArea.textContent)
             myTextArea.selectionEnd = postionCarret;
             myTextArea.selectionSend = postionCarret;
             myTextArea.innerHTML = myTextArea.textContent.slice(0,postionCarret-1) + myTextArea.textContent.slice(postionCarret,myTextArea.textContent.length);
-            postionCarret--
-            console.log(myTextArea.textContent)   
+            postionCarret-- 
             return myTextArea
         }
         else if(postionCarret === myTextArea.textContent.length){
-            console.log(postionCarret,myTextArea.textContent.length)
             postionCarret = myTextArea.textContent.length
             myTextArea.selectionEnd = postionCarret;
             myTextArea.selectionSend = postionCarret;
@@ -151,19 +141,19 @@ function listener(element) {
                 e.target.getAttribute('data').includes('ArrowRight')
             ){
                 postionCarret++
-                myTextArea.innerHTML += e.target.textContent
+                myTextArea.innerHTML += e.target.textContent;
             }
         }
         if(e.target.getAttribute('data') === 'Delete'){
-            getPosition(myTextArea)
+            return listenerDelete();
         }
         if(e.target.getAttribute('data') === 'Enter'){
-            postionCarret++
-            return myTextArea.innerHTML += '\n'
+            postionCarret++;
+            return myTextArea.innerHTML += '\n';
         }
         if(e.target.getAttribute('data') === 'Space'){
-            postionCarret++
-            return myTextArea.innerHTML += ' '
+            postionCarret++;
+            return myTextArea.innerHTML += ' ';
         }
         if(e.target.getAttribute('data') === 'CapsLock'){
             listenrCapsLock(e)
@@ -182,12 +172,10 @@ function listener(element) {
         }
         if(e.target.classList.contains('textarea')){
             postionCarret = myTextArea.selectionStart
-            console.log(postionCarret)
         }
         
     })
     element.addEventListener('mousedown' , (e)=>{
-        
         if(e.target.getAttribute('data') === 'ShiftLeft' || e.target.getAttribute('data') === 'ShiftRight'){
             listenerShiftDown()
         }
@@ -200,7 +188,6 @@ function listener(element) {
         if(ctrlLeft&&altLeft){
             changeLang()
         }
-        
     })
     element.addEventListener('mouseup' , (e)=>{
         if(e.target.getAttribute('data') === 'ShiftLeft' || e.target.getAttribute('data') === 'ShiftRight'){
@@ -212,24 +199,19 @@ function listener(element) {
         if(e.target.getAttribute('data') === 'AltLeft'){
             altLeft = false
         }
-        
     })
-    
     element.addEventListener('keydown', (e) => {
-        // console.log(e.code)
         if(e.code === 'ControlLeft'){
             ctrlLeft = true;
         }
         if(e.code === 'AltLeft'){
             altLeft = true;
         }
-        
         if(ctrlLeft&&altLeft){
             changeLang()
         }
         if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
             listenerShiftDown(e)
-            
         }
         if(e.code === 'CapsLock'){
             listenrCapsLock()
@@ -264,7 +246,7 @@ function listener(element) {
                     return myTextArea;
                 }
                 if(e.code === 'Delete'){
-                    getPosition(myTextArea)
+                    return listenerDelete()
                 }
                 else{
                     postionCarret++
@@ -285,17 +267,17 @@ function listener(element) {
         }
         keyBoardNow.forEach(item=>{
             if(e.code === 'CapsLock' && capsLock && item.getAttribute('data') === 'CapsLock'){
-                return item.classList.add('keyboard__key-active')
+                return item.classList.add('keyboard__key-active');
             }
             if(e.code === item.getAttribute('data')){
-                item.classList.remove('keyboard__key-active')
+                item.classList.remove('keyboard__key-active');
             }
             if(item.getAttribute('data') === 'CapsLock' && capsLock){
-                item.classList.add('keyboard__key-active')
+                item.classList.add('keyboard__key-active');
             }
         })
     })
-    return keyboard
+    return keyboard;
 }
 
 export default listener
