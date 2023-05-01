@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/main.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
+      filename: 'script.js',
     },
     devtool:'eval-source-map',
     devServer: {
@@ -21,7 +21,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({  
           filename: 'index.html',
-          title: 'My-App',
+          title: 'Virtual Keyboard',
           template: 'src/index.html'
         })
       ],
