@@ -1,0 +1,111 @@
+$bk-ground: #313448;
+$color:#fff;
+$indent-20px:20px;
+$transition:0.3s;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: $bk-ground;
+    color: $color;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding-top: $indent-20px;
+    padding-bottom: $indent-20px;
+    font-family: "Trebuchet MS", "Helvetica", sans-serif;
+}
+.title{
+    font-size: 45px;
+    order:-1;
+    
+}
+.keyboard{
+    width: 750px;
+    display: flex;
+    // align-items: center;
+    border-radius: 5px;
+    border: 5px solid #65677d;
+    order: 2;
+    margin-top: $indent-20px;
+    background-color: rgba(189,190,207,.3);
+    &__row{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 3px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    &__key{
+        margin-right: 2px;
+        padding: 5px;
+        background: rgba(0,0,0,.5);
+        min-width: 45px;
+        height: 45px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: $transition;
+        &:last-child{
+            margin-right: 0px;
+        }
+        &:hover{
+            background-color: cadetblue;
+            transition: $transition;
+        }
+        &-active{
+            background-color: cadetblue;
+        }
+        &[data="ShiftLeft"]{
+            width: 95px;
+            &:last-child{
+                width: 95px;
+            }
+        }
+        &[data="ShiftRight"]{
+            width: 110px;
+        }
+        &[data="Backspace"]{
+            width: 110px;
+        }
+        &[data="Space"]{
+            width: 285px;
+        }
+        &[data="Enter"]{
+            width: 110px;
+        }
+        &[data="Tab"]{
+            width: 82px;
+        }
+        &[data="CapsLock"]{
+            width: 95px;
+        }
+        &[data="`"]{
+            width: 45px;
+        }
+    }
+}
+.textarea{
+    width: 750px;
+    height: 200px;
+    padding: $indent-20px;
+    font-size: 20px;
+    margin-top: $indent-20px;
+    border: 5px solid #65677d;
+    border-radius: 15px;
+    outline: none;
+    background: #7a7c94;
+    color: $color;
+}
+.description{
+    order: 4;
+    margin-top: 40px;
+    font-weight: 600;
+}
